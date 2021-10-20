@@ -8,7 +8,36 @@ import HomePage from './pages/HomePage';
 import NosotrosPage from './pages/NosotrosPage';
 import NovedadesPage from './pages/NovedadesPage';
 
+var pool = require('./bd');
+
 function App() {
+	
+  pool.query("SELECT * FROM empleados").then(function(resultados){
+	  console.log(resultados);
+  });
+
+  var obj = {
+	  nombre: 'Pepe',
+	  apellido: 'Honguito'
+  }	  
+  pool.query("INSERT INTO empleados SET ?", [obj]).then(function(resultados){
+	  console.log(resultados);
+  });
+  
+  var id = 23;
+  var obj = {
+	  nombre: 'Pepe',
+	  apellido: 'Honguito'
+  }
+  pool.query("UPDATE empleados SET ? WHERE apellido = ?", [obj, id]).then(function(resultados){
+	  console.log(resultados);
+  });
+  
+  var id = 23;
+  pool.query("DELETE FROM empleados WHERE id = ?", [id]).then(function(resultados){
+	  console.log(resultados);
+  });
+		
   return (
     <Router>
       <Header/>
