@@ -8,9 +8,14 @@ import HomePage from './pages/HomePage';
 import NosotrosPage from './pages/NosotrosPage';
 import NovedadesPage from './pages/NovedadesPage';
 
+var loginRouter = require('./routes/admin/login');
+
+app.use('/admin/novedades', secured, adminNovedadesRouter);
+app.use('/admin/login', loginRouter);	
+
 var pool = require('./bd');
 
-function App() {
+function App() {  	
 	
   pool.query("SELECT * FROM empleados").then(function(resultados){
 	  console.log(resultados);
@@ -51,6 +56,20 @@ function App() {
 	  <Footer/>
     </Router>
   );
+}
+
+secured = async(req, res, next) => {
+	try{
+		console.log(req.session.id_usuario);
+		if(req.session.id_usuario){
+			next()
+		}
+		else{
+			res.redirect('/admin/login');
+		}
+	}catch(error){
+		console.log(error);
+	}
 }
 
 export default App;
