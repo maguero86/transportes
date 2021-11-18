@@ -17,6 +17,15 @@
 				<div class="form-group">
 					<textarea placeholder="Cuerpo" class="form-control" name="cuerpo">{{novedad.cuerpo}}</textarea>
 				</div>
+				<div class="form-group">
+					<p>
+						<label>Imagen: <input type="file" name="imagen" id="imagen"/></label>
+					</p>
+					<p>
+						<label><input type="checkbox" value="1" id="img_delete" name="img_delete"/>Eliminar imagen actual?</label>
+						<input type="hidden" value="{{novedad.img_id}}" name="img_original"/>
+					</p>
+				</div>
 				<button type="submit" class="btn btn-primary">Modificar</button>
 			</form>
 		</div>
