@@ -10,6 +10,19 @@ import NovedadesPage from './pages/NovedadesPage';
 
 var loginRouter = require('./routes/admin/login');
 
+var fileUpload = require('express-fileupload');
+
+var cors = require('cors');
+
+var apiRouter = require('./routes/api');
+
+app.use('/api', cors(), apiRouter);
+
+app.use(fileUpload({
+	useTempFiles: true,
+	tempFileDir: '/tmp/'
+}));
+
 app.use('/admin/novedades', secured, adminNovedadesRouter);
 app.use('/admin/login', loginRouter);	
 
